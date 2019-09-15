@@ -1,33 +1,92 @@
+html, body, #root, .App {
+  height: 100%
+}
+
+#root {
+  font-family: 'Roboto', sans-serif;
+  background-color: #333333;
+}
+
 .App {
+  padding: 50px 0;
+  position: relative;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.content {
+  margin: 0 auto;
+  width: 424px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#btn-word {
+  background-color: #333;
+  border-color: #e65000;
+  border-radius: 30px;
+  font-size: 30px;
+  height: 100px;
+  margin: 20px 0;
+  width: 100%;
+}
+
+#btn-word:focus {
+  border-color: #e65000;
+  box-shadow: none;
+}
+
+#btn-word:hover, #btn-word:active {
+  background-color: #e65000;
+  border-color: #e65000;
+}
+
+#btn-word.empty {
+  background-color: #e65000;
+}
+
+#btn-word.empty:hover, 
+#btn-word.empty:active {
+  background-color: #333;
+  border-color: #e65000;
+}
+
+.progress {
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 30px 0 0;
+}
+
+.progress-bar {
+  background-color: #e65000;
+  border-radius: 10px;
+  width: 0%;
+}
+
+.progress-bar.running {
+  width: 100%;
+}
+
+.progress-time {
+  color: #e65000;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: 0.9rem;
+  justify-content: space-between;
+  margin: 5px 0 30px;
 }
 
-.App-link {
-  color: #61dafb;
+.control {
+  color: #e65000;
+  font-size: 50px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.control .playpause {
+  color: #fff;
+  font-size: 80px;
+  margin: 0 50px;
 }
+
+.control .btn-lang {
+  border: solid 4px #e65000;
+  border-radius: 50%;
+  font-size: 20px;
+  padding: 5px;
+}
+

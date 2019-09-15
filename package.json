@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "apisauce": "^1.1.0",
+    "bootstrap": "^4.3.1",
     "react": "^16.9.0",
+    "react-compound-timer": "^1.1.5",
+    "react-countdown-now": "^2.1.1",
     "react-dom": "^16.9.0",
+    "react-icons": "^3.7.0",
     "react-scripts": "3.1.1"
   },
   "scripts": {
@@ -18,14 +23,21 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      ">0.2%", "not dead", "not op_mini all"
     ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+  },
+  "devDependencies": {
+    "eslint": "^6.4.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "eslint-plugin-standard": "^4.0.1"
+  },
+  "proxy": "http://dicionario-aberto.net"
 }
