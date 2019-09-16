@@ -79,6 +79,7 @@ html, body, #root, .App {
 
 .control .playpause {
   color: #fff;
+  cursor: pointer;
   font-size: 80px;
   margin: 0 50px;
 }

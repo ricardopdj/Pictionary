@@ -11,7 +11,8 @@ class App extends Component {
     this.state = {
       empty: true,
       word: 'give me a word',
-      running: false,
+      isLoading: false,
+      isRunning: false,
       progressWidth: 0
     }
     this.countDown = null
@@ -19,14 +20,14 @@ class App extends Component {
   }
 
   startCountDown = () => {
-    this.setState({ running: true })
+    this.setState({ isRunning: true })
 
     this.countDown = setInterval(() => {
       this.setState(prevState => ({
         progressWidth: prevState.progressWidth + 1
       }))
       if (this.state.progressWidth === 100) {
-        this.setState({ running: false })
+        this.setState({ isRunning: false })
         clearInterval(this.countDown)
       }
     }, 600)
@@ -34,14 +35,21 @@ class App extends Component {
 
   pauseCountDown = () => {
     clearInterval(this.countDown)
-    this.setState({ running: false })
+    this.setState({ isRunning: false })
   }
 
   async getWord () {
+    if (this.state.isRunning) {
+      return false
+    }
+    this.setState({ isLoading: true, progressWidth: 0 })
     const result = await API.get()
+    console.log(result)
+
     this.setState({
       word: result.data.entry.form.orth,
-      empty: false
+      empty: false,
+      isLoading: false
     })
   }
 
@@ -57,7 +65,17 @@ class App extends Component {
             id="btn-word"
             onClick={this.getWord}
           >
-            {this.state.word}
+            {this.state.isLoading ? (
+              <div
+                className="spinner-border"
+                role="status"
+                style={{ width: '3rem', height: '3rem', fontSize: '10px' }}
+              >
+                <span className="sr-only">Loading...</span>
+              </div>
+            ) : (
+              <span>{this.state.word}</span>
+            )}
           </button>
           <div className="progress">
             <div
@@ -79,7 +97,7 @@ class App extends Component {
 
           <div className="control">
             {/* <FaRedoAlt /> */}
-            {this.state.running ? (
+            {this.state.isRunning ? (
               <FaPauseCircle
                 onClick={this.pauseCountDown}
                 className="playpause"
