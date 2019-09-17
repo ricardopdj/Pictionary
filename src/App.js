@@ -4,6 +4,8 @@ import './App.css'
 import API from './API.js'
 import { FaRegPlayCircle, FaPauseCircle } from 'react-icons/fa'
 import logo from './assets/logo.png'
+import enWords from './words_en'
+import ptWords from './words_pt'
 
 class App extends Component {
   constructor (props) {
@@ -11,12 +13,15 @@ class App extends Component {
     this.state = {
       empty: true,
       word: 'give me a word',
+      wordPt: 'manda uma palavra',
       isLoading: false,
       isRunning: false,
-      progressWidth: 0
+      progressWidth: 0,
+      currentLang: 'en'
     }
     this.countDown = null
     this.getWord = this.getWord.bind(this)
+    this.translate = this.translate.bind(this)
   }
 
   startCountDown = () => {
@@ -43,14 +48,27 @@ class App extends Component {
       return false
     }
     this.setState({ isLoading: true, progressWidth: 0 })
-    const result = await API.get()
-    console.log(result)
-
+    try {
+      const index = Math.floor(Math.random() * enWords.length)
+      this.setState({
+        word: enWords[index],
+        wordPt: ptWords[index],
+        empty: false
+      })
+    } catch (error) {
+      alert('Houston, we have a problem!')
+    }
     this.setState({
-      word: result.data.entry.form.orth,
-      empty: false,
       isLoading: false
     })
+  }
+
+  translate () {
+    if (this.state.currentLang === 'en') {
+      this.setState({ currentLang: 'pt' })
+    } else {
+      this.setState({ currentLang: 'en' })
+    }
   }
 
   render () {
@@ -74,7 +92,11 @@ class App extends Component {
                 <span className="sr-only">Loading...</span>
               </div>
             ) : (
-              <span>{this.state.word}</span>
+              <span>
+                {this.state.currentLang === 'en'
+                  ? this.state.word
+                  : this.state.wordPt}
+              </span>
             )}
           </button>
           <div className="progress">
@@ -96,7 +118,6 @@ class App extends Component {
           </div>
 
           <div className="control">
-            {/* <FaRedoAlt /> */}
             {this.state.isRunning ? (
               <FaPauseCircle
                 onClick={this.pauseCountDown}
@@ -108,7 +129,9 @@ class App extends Component {
                 className="playpause"
               />
             )}
-            {/* <span className="btn-lang">EN</span> */}
+            <span className="btn-lang" onClick={this.translate}>
+              {this.state.currentLang === 'en' ? 'PT' : 'EN'}
+            </span>
           </div>
         </div>
       </div>
