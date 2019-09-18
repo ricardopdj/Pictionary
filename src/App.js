@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css'
-import API from './API.js'
 import { FaRegPlayCircle, FaPauseCircle } from 'react-icons/fa'
 import logo from './assets/logo.png'
 import enWords from './words_en'
@@ -74,7 +73,7 @@ class App extends Component {
   render () {
     return (
       <div className="App">
-        <img src={logo} alt="Logo" />
+        <img src={logo} alt="Logo" className="img-fluid" />
         <div className="content">
           <button
             className={`btn btn-primary btn-lg ${
